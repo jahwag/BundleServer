@@ -1,0 +1,51 @@
+-Introduction-
+Bundle Server is a generic and reusable OSGi-based (modular) server which supports runtime deployment of custom client-server protocols using protocol bundles.
+
+-Function-
+The Bundle Server Core will locate any implementation of ClientCommandProcessor inside the OSGi environment and load them at runtime. This allows protocols to be loaded, unloaded and updated during runtime without taking the server down.
+
+The idea is to provide a base for implementing any TCP server by simply defining command processors and their respective actions on the server state. 
+
+-Usage-
+The included maven project provides a ready execution environment under Apache Felix.
+
+To test the included Lobby Protocol sample found in BundleServer\Sample\SampleLobbyServer run:
+mvn -Prun-on-felix package antrun:run
+
+You should see an output like this:
+     [INFO][com.bundleserver.core.BundleServer]: Attempting to start server.
+     [INFO][com.bundleserver.core.BundleServer]: Listening for incoming connections.
+     [[INFO][com.bundleserver.core.BundleServer]: Started server successfully on 0.0.0.0:9181 in 0 ms.
+     [INFO][com.bundleserver.core.BundleServer]: ServiceEvent REGISTERED
+     [INFO][org.apache.felix.log]: BundleEvent STARTED
+     [INFO][com.bundleserver.samples.LobbyProtocol]: BundleEvent RESOLVED
+     [INFO][com.bundleserver.core.BundleServer]: Registered ClientCommandProcessor: com.bundleserver.samples.lobbyprotocol.clientcommands.LoginCommand
+     [INFO][com.bundleserver.samples.LobbyProtocol]: ServiceEvent REGISTERED
+     [INFO][com.bundleserver.samples.LobbyProtocol]: BundleEvent STARTED
+     [INFO][com.bundleserver.lobbyserver.LobbyServerSample]: BundleEvent RESOLVED
+     [INFO][com.bundleserver.lobbyserver.LobbyServerSample]: BundleEvent STARTED
+     [INFO][org.apache.felix.framework]: BundleEvent STARTED
+     [INFO][org.apache.felix.framework]: FrameworkEvent STARTED
+	 
+To connect with a client go to BundleServer\Sample\SampleLobbyClient and run:
+mvn exec:java
+
+You should now see an output as follows from the server:
+     [java] LogHandler:19:05:25 CEST [INFO][com.bundleserver.core.BundleServer]: Client 127.0.0.1:9181 connected.
+     [java] LogHandler:19:05:55 CEST [INFO][com.bundleserver.core.BundleServer]: Client 127.0.0.1:9181 disconnected. Freeing thread 15.
+	 
+Type 'help' in the client console to see a list of available commands. Note that this is only a showcase and thus the client is very limited (as is the Lobby Protocol sample). 
+
+-Development-
+The Bundle Server supports any TCP connection. Included in SampleLobbyClient is an example of a Java Client using the Bundle Server Commons library. 
+
+To create your own server implementation, see the Lobby Protocol sample for how to implement a bundle containing ClientCommandProcessor. 
+
+Each protocol bundle may contain multiple processors. You can also have several protocol bundles for different aspects e.g. say in the case of a game, matchmaking service, gameplay, ranking, highscore, etc.
+
+Anyone is welcome to submit pull requests, I will happily include any improvements to the server core or included samples.
+
+-License-
+http://www.apache.org/licenses/LICENSE-2.0.html
+
+In summary, you are free to use this work in any commercial and/or open source applications and redistribute it as you see fit.
