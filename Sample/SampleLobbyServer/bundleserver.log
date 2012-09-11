@@ -1,0 +1,15 @@
+19:05:19 CEST [INFO][com.bundleserver.core.BundleServer]: Attempting to start server.
+19:05:19 CEST [INFO][com.bundleserver.core.BundleServer]: Listening for incoming connections.
+19:05:19 CEST [INFO][com.bundleserver.core.BundleServer]: Started server successfully on 0.0.0.0:9181 in 0 ms.
+19:05:19 CEST [INFO][com.bundleserver.core.BundleServer]: ServiceEvent REGISTERED
+19:05:19 CEST [INFO][org.apache.felix.log]: BundleEvent STARTED
+19:05:19 CEST [INFO][com.bundleserver.samples.LobbyProtocol]: BundleEvent RESOLVED
+19:05:19 CEST [INFO][com.bundleserver.core.BundleServer]: Registered ClientCommandProcessor: com.bundleserver.samples.lobbyprotocol.clientcommands.LoginCommand
+19:05:19 CEST [INFO][com.bundleserver.samples.LobbyProtocol]: ServiceEvent REGISTERED
+19:05:19 CEST [INFO][com.bundleserver.samples.LobbyProtocol]: BundleEvent STARTED
+19:05:19 CEST [INFO][com.bundleserver.lobbyserver.LobbyServerSample]: BundleEvent RESOLVED
+19:05:19 CEST [INFO][com.bundleserver.lobbyserver.LobbyServerSample]: BundleEvent STARTED
+19:05:19 CEST [INFO][org.apache.felix.framework]: BundleEvent STARTED
+19:05:19 CEST [INFO][org.apache.felix.framework]: FrameworkEvent STARTED
+19:05:25 CEST [INFO][com.bundleserver.core.BundleServer]: Client 127.0.0.1:9181 connected.
+19:05:55 CEST [INFO][com.bundleserver.core.BundleServer]: Client 127.0.0.1:9181 disconnected. Freeing thread 15.
