@@ -13,11 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bundleserver;
+package com.bundleserver.samples.sampleclient.client_api;
 
-public interface BundleServer {
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 
-	//public void start();
+public interface CommandWrapper {
 
-	//public void shutdown();
+	/**
+	 * Invoked when command is executed by the client.
+	 * <p/>
+	 * @param connection
+	 * @param os
+	 * @throws IOException
+	 */
+	void execute(Socket connection, BufferedOutputStream os) throws IOException;
+
+	/**
+	 * Short description of the command for the user.
+	 * <p/>
+	 * @return
+	 */
+	String getDescription();
 }

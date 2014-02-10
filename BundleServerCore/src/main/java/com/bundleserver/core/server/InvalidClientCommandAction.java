@@ -30,16 +30,16 @@ import java.util.logging.Logger;
  */
 public class InvalidClientCommandAction extends PostClientCommandProcessingAction {
 
-	public InvalidClientCommandAction(BufferedWriter out, RawCommand command) {
-		super(out, command);
+	public InvalidClientCommandAction(RawCommand command) {
+		super(command);
 	}
 
 	@Override
-	public void execute() {
+	public void execute(BufferedWriter outputStream) {
 		try {
-			getOutputStream().
+			outputStream.
 				   write("Error: Unknown command '" + getCommand() + "'\n");
-			getOutputStream().
+			outputStream.
 				   flush();
 
 		} catch (IOException ex) {

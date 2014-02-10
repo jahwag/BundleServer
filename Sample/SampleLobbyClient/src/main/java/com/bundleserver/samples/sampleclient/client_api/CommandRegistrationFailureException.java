@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bundleserver;
 
-public interface BundleServer {
+package com.bundleserver.samples.sampleclient.client_api;
 
-	//public void start();
+public class CommandRegistrationFailureException extends Exception {
 
-	//public void shutdown();
+	public CommandRegistrationFailureException(Throwable cause) {
+		super(cause);
+	}
+
 }

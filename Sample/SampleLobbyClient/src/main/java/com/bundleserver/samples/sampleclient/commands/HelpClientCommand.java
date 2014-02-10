@@ -15,43 +15,35 @@
  */
 package com.bundleserver.samples.sampleclient.commands;
 
-import com.bundleserver.samples.sampleclient.clientinterfaces.ClientCommandWrapper;
-import com.bundleserver.samples.sampleclient.clientinterfaces.CommandRegistrationFailureException;
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.net.Socket;
+import com.bundleserver.samples.sampleclient.client_api.ClientCommandWrapper;
+import com.bundleserver.samples.sampleclient.client_api.CommandRegistrationFailureException;
+import com.bundleserver.samples.sampleclient.client_api.CommandWrapper;
 import java.util.Collection;
 
 /**
- * Sends the LOGIN Command.
+ * This is a client-side command.
  * @author Jahziah Wagner <jahziah[dot]wagner[at]gmail[dot]com>
  */
 public class HelpClientCommand extends ClientCommandWrapper {
-	private final Collection<ClientCommandWrapper> commands;
+	private final Collection<CommandWrapper> commands;
 
-	public HelpClientCommand(Collection<ClientCommandWrapper> commands) throws CommandRegistrationFailureException {
+	public HelpClientCommand(Collection<CommandWrapper> commands) throws CommandRegistrationFailureException {
 		super();
 		this.commands = commands;
 	}
 
-
 	@Override
-	public void execute(Socket connection, BufferedOutputStream os) throws IOException {
-		System.out.println("Available commands: ");
+	protected void execute() {
+		System.out.println(">");
 
-		for(ClientCommandWrapper commandWrapper : commands) {
-			//System.out.println(commandWrapper.getDescription());
+		for(CommandWrapper commandWrapper : commands) {
+			System.out.println(commandWrapper.getDescription());
 		}
 	}
 
 	@Override
 	public String getDescription() {
 		return "HELP - Shows available lobby commands.";
-	}
-
-	@Override
-	public String toString() {
-		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 }

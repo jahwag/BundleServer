@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bundleserver.samples.sampleclient.clientinterfaces;
+package com.bundleserver.samples.sampleclient.client_api;
 
-import com.bundleserver.samples.sampleclient.clientinterfaces.ClientCommandWrapper;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractClient {
 
-	private final Map<String, ClientCommandWrapper> registeredCommands = register(new HashMap<String, ClientCommandWrapper>());
+	private final Map<String, CommandWrapper> registeredCommands = register(new HashMap<String, CommandWrapper>());
 
 	/**
 	 * Register supported client commands.
@@ -30,13 +29,13 @@ public abstract class AbstractClient {
 	 * @param commands
 	 * @return all commands to be made available.
 	 */
-	public abstract Map<String, ClientCommandWrapper> register(Map<String, ClientCommandWrapper> commands);
+	public abstract Map<String, CommandWrapper> register(Map<String, CommandWrapper> commands);
 
 	/**
 	 * Not available when register() is called.
 	 * @return immutable collection of commands available.
 	 */
-	public Map<String, ClientCommandWrapper> getRegisteredCommands() {
+	public Map<String, CommandWrapper> getRegisteredCommands() {
 		return Collections.unmodifiableMap(registeredCommands);
 	}
 

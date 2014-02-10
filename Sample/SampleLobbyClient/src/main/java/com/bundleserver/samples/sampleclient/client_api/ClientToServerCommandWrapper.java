@@ -13,26 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bundleserver.samples.sampleclient.clientinterfaces;
+package com.bundleserver.samples.sampleclient.client_api;
 
 import com.bundleserver.bundleservercommons.processors.ClientCommandProcessor;
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.net.Socket;
 
-public abstract class ClientCommandWrapper {
+/**
+ * Wraps a ClientCommandProcessor to provide client-implementation.
+ * <p/>
+ * @author Jahziah Wagner <jahziah[dot]wagner[at]gmail[dot]com>
+ */
+public abstract class ClientToServerCommandWrapper implements CommandWrapper {
 
 	private final ClientCommandProcessor commandProcessor;
 
-	/**
-	 * Dummy Command constructor, for client-side command.
-	 * @throws CommandRegistrationFailureException
-	 */
-	public ClientCommandWrapper() throws CommandRegistrationFailureException {
-		commandProcessor = null;
-	}
-
-	public ClientCommandWrapper(Class<? extends ClientCommandProcessor> clazz) throws CommandRegistrationFailureException {
+	public ClientToServerCommandWrapper(Class<? extends ClientCommandProcessor> clazz) throws CommandRegistrationFailureException {
 		try {
 			commandProcessor = clazz.newInstance();
 		} catch (InstantiationException | IllegalAccessException ex) {
@@ -43,13 +37,4 @@ public abstract class ClientCommandWrapper {
 	public ClientCommandProcessor getCommandProcessor() {
 		return commandProcessor;
 	}
-
-	public abstract void execute(Socket connection, BufferedOutputStream os) throws IOException;
-
-
-	protected abstract String getDescription();
-
-	@Override
-	public abstract String toString();
-
 }

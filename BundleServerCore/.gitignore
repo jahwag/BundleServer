@@ -1,5 +1,13 @@
 *.class
 
+# Eclipse #
+.settings
+.classpath
+.project
+
+# Netbeans #
+nbactions.xml
+
 # Package Files #
 *.jar
 *.war

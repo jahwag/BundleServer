@@ -19,20 +19,33 @@ import com.bundleserver.bundleservercommons.actions.PostClientCommandProcessingA
 import com.bundleserver.bundleservercommons.core.CommandId;
 import com.bundleserver.bundleservercommons.core.RawCommand;
 import com.bundleserver.bundleservercommons.processors.ClientCommandProcessor;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import org.osgi.service.log.LogService;
 
-public class LoginCommand implements ClientCommandProcessor {
+public class LoginCommand extends ClientCommandProcessor {
 
-	private volatile LogService logging;
+	private final CommandId[] associatedIds = new CommandId[]{new CommandId(3)};
 
 	public PostClientCommandProcessingAction processCommand(RawCommand cmnd) {
-		logging.log(LogService.LOG_INFO, "Executing Client Command" + getClass().getSimpleName());
+		getLogger()
+			   .log(LogService.LOG_INFO, "Executing Client Command" + getClass()
+			   .getSimpleName());
 
-		return null;
+		return new PostClientCommandProcessingAction(cmnd) {
+
+			@Override
+			public void execute(BufferedWriter outputStream) throws IOException {
+				outputStream.append("Reply: Success!");
+				outputStream.flush();
+			}
+		};
 	}
 
+	@Override
 	public CommandId[] getAssociatedIds() {
-		return new CommandId[]{ new CommandId(3) };
+		return associatedIds;
 	}
+
 
 }

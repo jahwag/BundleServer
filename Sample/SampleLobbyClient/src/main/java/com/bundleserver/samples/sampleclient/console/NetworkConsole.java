@@ -1,10 +1,10 @@
 package com.bundleserver.samples.sampleclient.console;
 
-import com.bundleserver.samples.sampleclient.clientinterfaces.AbstractClient;
+import com.bundleserver.samples.sampleclient.client_api.AbstractClient;
 import com.bundleserver.samples.sampleclient.commands.HelpClientCommand;
 import com.bundleserver.samples.sampleclient.commands.LoginClientCommand;
-import com.bundleserver.samples.sampleclient.clientinterfaces.ClientCommandWrapper;
-import com.bundleserver.samples.sampleclient.clientinterfaces.CommandRegistrationFailureException;
+import com.bundleserver.samples.sampleclient.client_api.CommandRegistrationFailureException;
+import com.bundleserver.samples.sampleclient.client_api.CommandWrapper;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -29,7 +29,7 @@ public class NetworkConsole extends AbstractClient {
 
 	public void execute(String input) throws IOException {
 		String cmd = input.split(" ")[0];
-		ClientCommandWrapper commandWrapper = getRegisteredCommands().
+		CommandWrapper commandWrapper = getRegisteredCommands().
 			   get(cmd.toUpperCase());
 
 		if (commandWrapper != null) {
@@ -46,7 +46,7 @@ public class NetworkConsole extends AbstractClient {
 	}
 
 	@Override
-	public Map<String, ClientCommandWrapper> register(Map<String, ClientCommandWrapper> commands) {
+	public Map<String, CommandWrapper> register(Map<String, CommandWrapper> commands) {
 		try {
 			commands.put("LOGIN", new LoginClientCommand());
 			commands.put("HELP", new HelpClientCommand(commands.values()));

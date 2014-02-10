@@ -1,1 +1,20 @@
-/target/
+*.class
+
+# Eclipse #
+.settings
+.classpath
+.project
+
+# Netbeans #
+nbactions.xml
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Target dir #
+target/
+
+# BundleServer #
+bundleserver.log

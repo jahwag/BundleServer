@@ -15,6 +15,7 @@
  */
 package com.bundleserver.core;
 
+import com.bundleserver.BundleServer;
 import com.bundleserver.core.server.ClientCommandProcessorRepository;
 import com.bundleserver.bundleservercommons.processors.ClientCommandProcessor;
 import java.io.IOException;

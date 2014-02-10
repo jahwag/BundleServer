@@ -15,6 +15,7 @@
  */
 package com.bundleserver.core;
 
+import com.bundleserver.BundleServer;
 import com.bundleserver.bundleservercommons.processors.ClientCommandProcessor;
 import org.apache.felix.dm.DependencyActivatorBase;
 import org.apache.felix.dm.DependencyManager;

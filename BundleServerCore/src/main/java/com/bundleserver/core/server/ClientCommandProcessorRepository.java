@@ -20,6 +20,7 @@ import com.bundleserver.bundleservercommons.core.CommandId;
 import com.bundleserver.bundleservercommons.core.RawCommand;
 import com.bundleserver.bundleservercommons.processors.ClientCommandProcessor;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -73,31 +74,35 @@ public class ClientCommandProcessorRepository {
 	}
 
 	public void processCommand(RawCommand commandToProcess, BufferedWriter out) {
-		final List<ClientCommandProcessor> commandProcessors = getCommandProcessors(commandToProcess);
+		final List<ClientCommandProcessor> commandProcessors = processorCollection
+			   .get(commandToProcess.getCommand());
 
-		if(commandProcessors == null) {
+		if (commandProcessors == null) {
 			logging
 				   .log(LogService.LOG_DEBUG, "Received an invalid command from client.");
-			new InvalidClientCommandAction(out, commandToProcess).execute();
+			new InvalidClientCommandAction(commandToProcess).execute(out);
 			return;
 		}
 
 		for (ClientCommandProcessor processor : commandProcessors) {
 			PostClientCommandProcessingAction postProcessAction = processor.
 				   processCommand(commandToProcess);
-			postProcessAction.execute();
 
-			logging
+			try {
+				postProcessAction.execute(out);logging
 				   .log(LogService.LOG_DEBUG, "Processed message: " + commandToProcess
 				   .getMessage());
+			} catch (IOException ex) {
+				logging
+				   .log(LogService.LOG_ERROR, "Failed to process message: " + commandToProcess
+				   .getMessage());
+			}
+
+
 		}
 	}
 
 	public boolean isEmpty() {
 		return processorCollection.isEmpty();
-	}
-
-	private List<ClientCommandProcessor> getCommandProcessors(RawCommand commandToGet) {
-		return processorCollection.get(commandToGet.getCommand());
 	}
 }

@@ -16,8 +16,8 @@
 package com.bundleserver.samples.sampleclient.commands;
 
 import com.bundleserver.samples.lobbyprotocol.clientcommands.LoginCommand;
-import com.bundleserver.samples.sampleclient.clientinterfaces.ClientCommandWrapper;
-import com.bundleserver.samples.sampleclient.clientinterfaces.CommandRegistrationFailureException;
+import com.bundleserver.samples.sampleclient.client_api.ClientToServerCommandWrapper;
+import com.bundleserver.samples.sampleclient.client_api.CommandRegistrationFailureException;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -26,7 +26,7 @@ import java.net.Socket;
  * Sends the LOGIN Command.
  * @author Jahziah Wagner <jahziah[dot]wagner[at]gmail[dot]com>
  */
-public class LoginClientCommand extends ClientCommandWrapper {
+public class LoginClientCommand extends ClientToServerCommandWrapper {
 
 	public LoginClientCommand() throws CommandRegistrationFailureException {
 		super(LoginCommand.class);

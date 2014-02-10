@@ -80,7 +80,7 @@ public class ClientConnection implements Runnable {
 					clientCommandProcessors.
 						   processCommand(parsedCommand, out);
 					logging
-						   .log(LogService.LOG_DEBUG, "Got message: " + parsedCommand.toString() + " ("+parsedCommand.getClass().getSimpleName()+").");
+						   .log(LogService.LOG_DEBUG, "Got message: " + parsedCommand.getCommand().getClass().getSimpleName() + " ("+parsedCommand.getClass().getSimpleName()+").");
 				} else {
 					logging
 						   .log(LogService.LOG_INFO, "Invalid data received. ");

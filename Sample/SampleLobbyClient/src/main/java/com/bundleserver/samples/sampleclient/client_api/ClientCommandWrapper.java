@@ -14,12 +14,26 @@
  * limitations under the License.
  */
 
-package com.bundleserver.samples.sampleclient.clientinterfaces;
+package com.bundleserver.samples.sampleclient.client_api;
 
-public class CommandRegistrationFailureException extends Exception {
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 
-	public CommandRegistrationFailureException(Throwable cause) {
-		super(cause);
+/**
+ * A client-side only command which cannot communicate with the server.
+ * @author Jahziah Wagner <jahziah[dot]wagner[at]gmail[dot]com>
+ */
+public abstract class ClientCommandWrapper implements CommandWrapper {
+
+	@Override
+	public final void execute(Socket connection, BufferedOutputStream os) throws IOException {
+		execute();
 	}
+
+	protected abstract void execute();
+
+	@Override
+	public abstract String getDescription();
 
 }

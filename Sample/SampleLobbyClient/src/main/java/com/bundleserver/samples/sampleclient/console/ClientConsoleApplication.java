@@ -13,19 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bundleserver.samples.sampleclient;
+package com.bundleserver.samples.sampleclient.console;
 
-import com.bundleserver.samples.sampleclient.console.NetworkConsoleException;
-import com.bundleserver.samples.sampleclient.console.NetworkConsole;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ClientApplication {
+public class ClientConsoleApplication {
 
 	public static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
 
-	public ClientApplication() throws NetworkConsoleException, IOException {
+	public ClientConsoleApplication() throws NetworkConsoleException, IOException {
 		NetworkConsole networkConsole = new NetworkConsole();
 
 		String text = null;
